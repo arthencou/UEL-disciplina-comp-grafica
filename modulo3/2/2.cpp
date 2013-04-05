@@ -11,15 +11,19 @@
 #include <stdio.h>
 
 using namespace std;
+//GLintPoint peak;
+class GLintPoint{
+public:
+  GLint x,y;
+};
+GLintPoint peak;
+const float DEG2RAD = 3.14159/180;
 
-/* Função que desenha o círculo */
 void DrawCircle(float cx, float cy, float r, int num_segments)
 {
 	float theta = 2 * 3.1415926 / float(num_segments);
-
-    /* Cálculo do seno e cosseno */
-    float c = cosf(theta);
-    float s = sinf(theta);
+	float c = cosf(theta);//precalculate the sine and cosine
+	float s = sinf(theta);
 	float t;
 
 	float x = r;
@@ -93,6 +97,7 @@ void myDisplay(void)
 {
      glClear(GL_COLOR_BUFFER_BIT);     // clear the screen
      NOT();
+     glFlush();                        // send all output to display
 }
 //<<<<<<<<<<<<<<<<<<<<<<<< main >>>>>>>>>>>>>>>>>>>>>>
 int main(int argc, char** argv)
@@ -106,3 +111,4 @@ int main(int argc, char** argv)
         myInit();
         glutMainLoop();                       // go into a perpetual loop
 }
+
