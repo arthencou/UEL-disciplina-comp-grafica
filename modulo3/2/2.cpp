@@ -19,9 +19,23 @@ public:
 GLintPoint peak;
 const float DEG2RAD = 3.14159/180;
 
+void drawElipse(float xc, float yc, float radius)
+{
+glBegin(GL_LINE_LOOP);
+
+for(int i=0; i<=360; i++)
+{
+float degInRad = i* DEG2RAD;
+float x=xc+radius*cos(degInRad);
+float y=yc+radius*sin(degInRad);
+glVertex2f(x,y);
+}
+glEnd();
+}
+
 void DrawCircle(float cx, float cy, float r, int num_segments)
 {
-	float theta = 2 * 3.1415926 / float(num_segments);
+	float theta = (2 * 3.1415926) / float(num_segments);
 	float c = cosf(theta);//precalculate the sine and cosine
 	float s = sinf(theta);
 	float t;
@@ -40,6 +54,94 @@ void DrawCircle(float cx, float cy, float r, int num_segments)
             y = s * t + c * y;
 	}
 	glEnd();
+}
+
+void DrawHalfCircle(float cx, float cy, float r, int num_segments)
+{
+	float theta = ((2 * 3.1415926) / float(num_segments))/4;
+	float c = cosf(theta);//precalculate the sine and cosine
+	float s = sinf(theta);
+	float t;
+
+	float x = r;
+    float y = 0;
+
+	glBegin(GL_LINE_STRIP);
+	for(int ii = 0; ii < num_segments; ii++) {
+            /* Plotando o ponto */
+            glVertex2f(x + cx, y + cy);
+
+            /* Aplicando rotação de Matriz */
+            t = x;
+            x = c * x - s * y;
+            y = s * t + c * y;
+	}
+	glEnd();
+
+    glBegin(GL_LINE_STRIP);
+    theta = -((2 * 3.1415926) / float(num_segments))/4;
+	c = cosf(theta);//precalculate the sine and cosine
+	s = sinf(theta);
+
+
+    x = r;
+    y = 0;
+
+    for(int ii = 0; ii < num_segments; ii++) {
+            /* Plotando o ponto */
+            glVertex2f(x + cx, y + cy);
+
+            /* Aplicando rotação de Matriz */
+            t = x;
+            x = c * x - s * y;
+            y = s * t + c * y;
+	}
+	glEnd();
+}
+
+void AND()
+{
+        /* Desenhando o corpo da AND */
+        glBegin(GL_LINE_STRIP);
+                glVertex2i(323, 331);
+                glVertex2i(353, 331);
+        glEnd();
+
+        glBegin(GL_LINE_STRIP);
+                glVertex2i(323, 370);
+                glVertex2i(353, 370);
+        glEnd();
+
+        glBegin(GL_LINE_STRIP);
+                glVertex2i(323, 350);
+                glVertex2i(323, 331);
+        glEnd();
+
+        glBegin(GL_LINE_STRIP);
+                glVertex2i(323, 350);
+                glVertex2i(323, 370);
+        glEnd();
+
+        /* Desenhando as entradas */
+        glBegin(GL_LINE_STRIP);
+                glVertex2i(323, 340);
+                glVertex2i(300, 340);
+        glEnd();
+
+        glBegin(GL_LINE_STRIP);
+                glVertex2i(323, 360);
+                glVertex2i(300, 360);
+        glEnd();
+
+        /* Desenhando a saída */
+        glBegin(GL_LINE_STRIP);
+                glVertex2i(373, 350);
+                glVertex2i(393, 350);
+        glEnd();
+
+
+        /* Desenhando o semi-círculo */
+        DrawHalfCircle(353, 350, 20, 1000);
 }
 
 void NOT()
@@ -79,9 +181,55 @@ void NOT()
         /* Desenhando a saída da porta NOT */
         glBegin(GL_LINE_STRIP);
                 glVertex2i(357, 300);
-                glVertex2i(363, 300);
+                glVertex2i(383, 300);
         glEnd();
 }
+
+void OR()
+{
+        /* Desenhando o corpo da AND */
+        glBegin(GL_LINE_STRIP);
+                glVertex2i(323, 231);
+                glVertex2i(353, 231);
+        glEnd();
+
+        glBegin(GL_LINE_STRIP);
+                glVertex2i(323, 270);
+                glVertex2i(353, 270);
+        glEnd();
+
+        glBegin(GL_LINE_STRIP);
+                glVertex2i(323, 250);
+                glVertex2i(323, 231);
+        glEnd();
+
+        glBegin(GL_LINE_STRIP);
+                glVertex2i(323, 250);
+                glVertex2i(323, 270);
+        glEnd();
+
+        /* Desenhando as entradas */
+        glBegin(GL_LINE_STRIP);
+                glVertex2i(323, 240);
+                glVertex2i(300, 240);
+        glEnd();
+
+        glBegin(GL_LINE_STRIP);
+                glVertex2i(323, 260);
+                glVertex2i(300, 260);
+        glEnd();
+
+        /* Desenhando a saída */
+        glBegin(GL_LINE_STRIP);
+                glVertex2i(373, 250);
+                glVertex2i(393, 250);
+        glEnd();
+
+
+        /* Desenhando o semi-círculo */
+        DrawHalfCircle(353, 250, 20, 1000);
+}
+
 
  void myInit(void)
  {
@@ -96,7 +244,10 @@ void NOT()
 void myDisplay(void)
 {
      glClear(GL_COLOR_BUFFER_BIT);     // clear the screen
+     AND();
      NOT();
+     OR();
+     drawElipse(100, 100, 100);
      glFlush();                        // send all output to display
 }
 //<<<<<<<<<<<<<<<<<<<<<<<< main >>>>>>>>>>>>>>>>>>>>>>
