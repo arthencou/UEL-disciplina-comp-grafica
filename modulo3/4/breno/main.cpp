@@ -5,7 +5,7 @@
 #include <math.h>
 #include <stdio.h>
 
-#define LADOS 5 //DEFINA QUANTOS ARESTAS TEM O POLIGONO
+#define LADOS 8 //DEFINA QUANTOS ARESTAS TEM O POLIGONO
 
 Canvas cvs(640, 480, "try out Canvas"); //global canvas object
 double vetorAngle[50];
