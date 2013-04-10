@@ -65,7 +65,7 @@ Ponto interRetas(Ponto k, Ponto l, Ponto m, Ponto n)
 }
 
 Ponto p1, p2;
-int noImpressoes;
+int noImpressoes = 0;
 //void desenhaPentagrama(Ponto p1, Ponto p2, int noImpressoes)
 void desenhaPentagrama()
 {
@@ -73,10 +73,11 @@ void desenhaPentagrama()
 
 	/*Teste*/
 	glBegin(GL_LINE_LOOP);
-	glVertex2f(40.0, 40.0);
-	glVertex2f(50.0, 50.0);
-	glVertex2f(40.0, 40.0);
+	glVertex2f(100.0, 100.0);
+	glVertex2f(250.0, 250.0);
+	glVertex2f(175.0, 175.0);
 	glEnd();
+	glFlush();
 	/**/
 
 	/*Regular*
@@ -187,7 +188,7 @@ void display()
 {
     glClear( GL_COLOR_BUFFER_BIT );
     desenhaPentagrama();
-    glFlush();
+    //glFlush();
 }
 
 int main(int argc, char** argv)
