@@ -1,3 +1,10 @@
+/*
+ * Módulo 2
+ * Nomes:
+ *      Arthur Henrique Coutinho
+ *      Breno Naodi Kusunoki
+ *      Luiz Guilherme Castilho Martins
+ */
 #include <iostream>
 #include <cstdlib>
 #include <fstream>
@@ -5,7 +12,7 @@
 #include <time.h>
 
 #include "glut.h"
-#include "Fila.h"
+#include "fila.h"
 
 #define ARROW_LEFT 100
 #define ARROW_UP 101
