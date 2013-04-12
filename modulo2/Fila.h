@@ -1,3 +1,10 @@
+/*
+ * Módulo 2
+ * Nomes:
+ *      Arthur Henrique Coutinho
+ *      Breno Naodi Kusunoki
+ *      Luiz Guilherme Castilho Martins
+ */
 #include <iostream>
 
 using namespace std;

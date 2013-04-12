@@ -8,12 +8,9 @@
 #ifdef __APPLE__
 #include <GLUT/glut.h>
 #else
-#include <GL/glut.h>
+#include "glut.h"
 #endif
 
-#include <OpenGL/gl.h>
-#include <OpenGL/glu.h>
-#include <GLUT/glut.h>
 #include <math.h>
 #include <stdio.h>
 

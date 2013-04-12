@@ -1,4 +1,16 @@
+/*
+ * Módulo 3 - Exercício 3
+ * Nomes:
+ *      Arthur Henrique Coutinho
+ *      Breno Naodi Kusunoki
+ *      Luiz Guilherme Castilho Martins
+ */
+#ifdef __APPLE__
+#include <GLUT/glut.h>
+#else
 #include "glut.h"
+#endif
+
 #include "canvas.h"
 #include <math.h> 
 #include <stdio.h>
