@@ -1,8 +1,10 @@
-//#############################################################################
-//***************             Ernesto Yuiti Saito               ***************
-//*************** 5COP005 - Introdução à Computação Gráfica     ***************
-//#############################################################################
-
+/*
+* Módulo 4 - Exercício 1
+* Nomes:
+*      Arthur Henrique Coutinho
+*      Breno Naodi Kusunoki
+*      Luiz Guilherme Castilho Martins
+*/
 #include <cstdlib>
 #include <iostream>
 #include "glut.h"
@@ -29,8 +31,8 @@ void desenhaNaTela() {
     C = Poly.busca(); 
     int auxID;
     auxID = C.idPolyline[0];
-	          
-	glBegin(GL_POLYGON);
+            
+  glBegin(GL_POLYGON);
     glColor3f(0.0, 0.0, 0.0);
     for(int i=0 ; i<C.qtd ; i++) {
          if(auxID == C.idPolyline[i]) {
@@ -57,7 +59,7 @@ void desenhaNaTela() {
     glBegin(GL_LINE_STRIP); 
     for(int i = 0; i <= C.qtd; i++) {
          if(i != C.qtd) {  
-		      if(auxID == C.idPolyline[i]) {
+          if(auxID == C.idPolyline[i]) {
                    glVertex2f(C.x[i], C.y[i]);
               }
               else {
@@ -66,7 +68,7 @@ void desenhaNaTela() {
                    glFlush();
                    firstPoint = i;
                    auxID = C.idPolyline[i];
-                        	
+                          
                    glBegin(GL_LINE_STRIP); 
                    glVertex2f( C.x[i] , C.y[i]);
               }
@@ -108,7 +110,7 @@ void saveFile(char *fileName) {
     }
 }
 
-//######################################Lê um arquivo com as coordenadas do poligono
+//######################################LÃª um arquivo com as coordenadas do poligono
 void readFile(char *fileName) {
     fstream inStream;
     inStream.open(fileName, ios ::in); //Open the file
@@ -231,19 +233,19 @@ void translacao(float deltaX, float deltaY) {
 void CentroDeMassa()
 {      
     C = Line.busca();       
-	for(int f = 0; f < C.qtd; f++)
-	{
-		centroX += C.x[f];
-		centroY += C.y[f];             
-	}
+  for(int f = 0; f < C.qtd; f++)
+  {
+    centroX += C.x[f];
+    centroY += C.y[f];             
+  }
    
-	centroX /= C.qtd + 1;
-	centroY /= C.qtd + 1;
+  centroX /= C.qtd + 1;
+  centroY /= C.qtd + 1;
 }
 
 void rotacao(int angle) {
     CentroDeMassa();     
-	translacao(-centroX, -centroY); 
+  translacao(-centroX, -centroY); 
      
     double angleX, angleY;
     
@@ -305,9 +307,9 @@ class GLintPoint{
 
 void init( void )
 {
-    glClearColor( 1.0, 1.0, 1.0, 0.0 );	//get white background color
-    glColor3f( 0.0f, 0.0f, 0.0f );	//set drawing color
-    glPointSize( 4.0 );			//a dot is 4x4
+    glClearColor( 1.0, 1.0, 1.0, 0.0 ); //get white background color
+    glColor3f( 0.0f, 0.0f, 0.0f );  //set drawing color
+    glPointSize( 4.0 );     //a dot is 4x4
     glMatrixMode( GL_PROJECTION );
     glLoadIdentity();
     gluOrtho2D( 0.0, 500.0, 0.0, 500.0 );
@@ -321,8 +323,8 @@ void display()
 
 void drawDot( int x, int y )
 {
-    glBegin( GL_POINTS );			
-    glVertex2i( x, y );		//draw a points
+    glBegin( GL_POINTS );     
+    glVertex2i( x, y );   //draw a points
     glEnd();
 } 
 
@@ -330,25 +332,25 @@ void myMouse(int button, int state, int x, int y)
 {
     #define NUM 20
     //static GLintPoint List[NUM];
-    static int last = -1;            	// last index used so far 
+    static int last = -1;             // last index used so far 
 
     // test for mouse button as well as for a full array
     if(button == GLUT_LEFT_BUTTON && state == GLUT_DOWN && last < NUM -1)
-	{        
-	     if(inserirLinConect == true) { //Quando ativa a tecla 'r'
+  {        
+       if(inserirLinConect == true) { //Quando ativa a tecla 'r'
               GLint mouseX = x;
               GLint mouseY = screenHeight - y;
               
-	          Line.inserir(mouseX, mouseY, countTypePolyLine);
-	          
-	          int auxID;
-	          auxID = C.idPolyline[0];
-	          int firstPoint;
+            Line.inserir(mouseX, mouseY, countTypePolyLine);
+            
+            int auxID;
+            auxID = C.idPolyline[0];
+            int firstPoint;
               firstPoint = 0;
-	          
-	          C = Line.busca();
-	          glBegin(GL_LINE_STRIP);
-	          for(int i=0 ; i<C.qtd ; i++) {
+            
+            C = Line.busca();
+            glBegin(GL_LINE_STRIP);
+            for(int i=0 ; i<C.qtd ; i++) {
                    if(auxID == C.idPolyline[i]) {
                         glVertex2f(C.x[i], C.y[i]);
                    }
@@ -364,14 +366,14 @@ void myMouse(int button, int state, int x, int y)
                    }  
               }
               glEnd();
-	          glFlush();	          
+            glFlush();            
          }
          else if (inserirPol == true) { //Quando ativa a tecla 'p'
-	          GLint mouseX = x;
+            GLint mouseX = x;
               GLint mouseY = screenHeight - y;
               
-	          Poly.inserir(mouseX, mouseY, countTypePolyLine); 
-	          
+            Poly.inserir(mouseX, mouseY, countTypePolyLine); 
+            
               drawDot ( mouseX, mouseY );
               glFlush();
          }
@@ -396,10 +398,10 @@ void myMouse(int button, int state, int x, int y)
                    desenhaNaTela();
               }
          }
-	     
-	}
+       
+  }
     else if(button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN)
-	     last = -1;	         // reset the list to empty
+       last = -1;          // reset the list to empty
 }
 
 void myMovedMouse(  int mouseX, int mouseY)
@@ -414,25 +416,25 @@ void myKeyboard ( unsigned char key, int mouseX, int mouseY )
     
     switch( key )
     {
-         case 'p': //Cria um novo polígono 	          
-              inserirPol = true; 	      
+         case 'p': //Cria um novo polÃ­gono            
+              inserirPol = true;        
               erasePoint = false;    
               nextLocation = 0;
               modoTranslacao = modoRotacao = modoEscala = 0;
- 	          if(inserirLinConect==true) {
+            if(inserirLinConect==true) {
                    inserirLinConect = false;
                    countTypePolyLine++;
-              } 	          
-	          break;
-	          
-         case 'o': //Finaliza o polígono
+              }             
+            break;
+            
+         case 'o': //Finaliza o polÃ­gono
               inserirPol = false;
               inserirLinConect = false;  
               erasePoint = false;  
               nextLocation = 0;    
               modoTranslacao = modoRotacao = modoEscala = 0;      
               countTypePolyLine++;
-              desenhaNaTela();	          
+              desenhaNaTela();            
               break;
               
          case 'r': //Cria um conjunto de linhas conectadas
@@ -456,7 +458,7 @@ void myKeyboard ( unsigned char key, int mouseX, int mouseY )
               desenhaNaTela();
               break;
               
-         case 'a': //Apaga o ponto mais próximo do mouse
+         case 'a': //Apaga o ponto mais prÃ³ximo do mouse
               inserirLinConect = false;
               inserirPol = false;
               erasePoint = true;
@@ -464,7 +466,7 @@ void myKeyboard ( unsigned char key, int mouseX, int mouseY )
               modoTranslacao = modoRotacao = modoEscala = 0;
               break;
               
-         case 'm': //Move o ponto para a próxima localização (2 cliques, um marca e o outro clique move o ponto)
+         case 'm': //Move o ponto para a prÃ³xima localizaÃ§Ã£o (2 cliques, um marca e o outro clique move o ponto)
               inserirLinConect = false;
               inserirPol = false;    
               erasePoint = false;
@@ -472,7 +474,7 @@ void myKeyboard ( unsigned char key, int mouseX, int mouseY )
               modoTranslacao = modoRotacao = modoEscala = 0;
               break;
               
-         case 'd': //Limpa a tela e redesenha todos os polígonos
+         case 'd': //Limpa a tela e redesenha todos os polÃ­gonos
               inserirLinConect = false;
               inserirPol = false;    
               erasePoint = false;
@@ -491,7 +493,7 @@ void myKeyboard ( unsigned char key, int mouseX, int mouseY )
               exit ( -1 );
               break;
               
-         case 's': //Salva os polígonos em um arquivo texto, utilizando o formato de arquivo usado no programa 4
+         case 's': //Salva os polÃ­gonos em um arquivo texto, utilizando o formato de arquivo usado no programa 4
               inserirLinConect = false;
               inserirPol = false;    
               erasePoint = false;
@@ -501,7 +503,7 @@ void myKeyboard ( unsigned char key, int mouseX, int mouseY )
               saveFile("coordenadas.dat");
               break;
               
-         case 'l': //Leitura e visualização do arquivo de polígonos
+         case 'l': //Leitura e visualizaÃ§Ã£o do arquivo de polÃ­gonos
               inserirLinConect = false;
               inserirPol = false;    
               erasePoint = false;
@@ -513,7 +515,7 @@ void myKeyboard ( unsigned char key, int mouseX, int mouseY )
               readFile("coordenadas.dat"); 
               break;
               
-         case 'T': //Ativa a translação
+         case 'T': //Ativa a translaÃ§Ã£o
               inserirLinConect = false;
               inserirPol = false;    
               erasePoint = false;
@@ -529,7 +531,7 @@ void myKeyboard ( unsigned char key, int mouseX, int mouseY )
               modoRotacao = modoTranslacao = 0;
               modoEscala = 1;
               break;
-         case 'R': //Ativa a Rotação
+         case 'R': //Ativa a RotaÃ§Ã£o
               inserirLinConect = false;
               inserirPol = false;    
               erasePoint = false;
@@ -544,7 +546,7 @@ void myKeyboard ( unsigned char key, int mouseX, int mouseY )
               erasePoint = false;
               nextLocation = 0;
               modoRotacao = modoEscala = modoTranslacao = 0;   
-	          break;
+            break;
     }  
 }
 
@@ -597,35 +599,35 @@ int main(int argc, char** argv)
     localX = localY = 0;
     modoTranslacao = modoRotacao = modoEscala = 0;
     
-    cout << "[p] - Cria um novo polígono " << endl;
-    cout << "[o] - Finaliza o polígono" << endl;
+    cout << "[p] - Cria um novo polÃ­gono " << endl;
+    cout << "[o] - Finaliza o polÃ­gono" << endl;
     cout << "[r] - Cria um conjunto de linhas conectadas" << endl;
     cout << "[h] - Finaliza o conjunto de linhas conectadas" << endl;
-    cout << "[a] - Apaga o ponto mais próximo do mouse" << endl;
-    cout << "[m] - Move o ponto para a próxima localização (2 cliques, um marca e o outro clique move o ponto)" << endl;
-    cout << "[d] - Limpa a tela e redesenha todos os polígonos" << endl;
+    cout << "[a] - Apaga o ponto mais prÃ³ximo do mouse" << endl;
+    cout << "[m] - Move o ponto para a prÃ³xima localizaÃ§Ã£o (2 cliques, um marca e o outro clique move o ponto)" << endl;
+    cout << "[d] - Limpa a tela e redesenha todos os polÃ­gonos" << endl;
     cout << "[q] - Termina o programa" << endl;
-    cout << "[s] - Salva os polígonos em um arquivo texto" << endl;
-    cout << "[l] - Leitura e visualização do arquivo de polígonos" << endl << endl;
-    cout << "[T] - Ativa a translação" << endl;
+    cout << "[s] - Salva os polÃ­gonos em um arquivo texto" << endl;
+    cout << "[l] - Leitura e visualizaÃ§Ã£o do arquivo de polÃ­gonos" << endl << endl;
+    cout << "[T] - Ativa a translaÃ§Ã£o" << endl;
     cout << "[E] - Ativa a Escala" << endl;
-    cout << "[R] - Ativa a Rotação" << endl;
-    cout << "[Key_UP] - Controla a Translação ou Escala ou Rotação" << endl;
-    cout << "[Key_DOWN] - Controla a Translação ou Escala" << endl;
-    cout << "[Key_LEFT] - Controla a Translação" << endl;
-    cout << "[Key_RIGHT] - Controla a Translação" << endl;
+    cout << "[R] - Ativa a RotaÃ§Ã£o" << endl;
+    cout << "[Key_UP] - Controla a TranslaÃ§Ã£o ou Escala ou RotaÃ§Ã£o" << endl;
+    cout << "[Key_DOWN] - Controla a TranslaÃ§Ã£o ou Escala" << endl;
+    cout << "[Key_LEFT] - Controla a TranslaÃ§Ã£o" << endl;
+    cout << "[Key_RIGHT] - Controla a TranslaÃ§Ã£o" << endl;
     
-    glutInit(&argc, argv);	//initialize toolkit
-    glutInitDisplayMode (GLUT_SINGLE | GLUT_RGB );	//set display mode
-    glutInitWindowSize(500, 500);		//set window size on screen
-    glutInitWindowPosition( 100, 150 ); 	//set window position on screen
-    glutCreateWindow(argv[0]);		//open screen widow
+    glutInit(&argc, argv);  //initialize toolkit
+    glutInitDisplayMode (GLUT_SINGLE | GLUT_RGB );  //set display mode
+    glutInitWindowSize(500, 500);   //set window size on screen
+    glutInitWindowPosition( 100, 150 );   //set window position on screen
+    glutCreateWindow(argv[0]);    //open screen widow
     init();
     glutMouseFunc( myMouse );
     glutMotionFunc( myMovedMouse );
     glutKeyboardFunc( myKeyboard );
     glutSpecialFunc(GerenciaTeclasEspeciais);
     glutDisplayFunc( display );
-    glutMainLoop();			//go into perpetual loop
+    glutMainLoop();     //go into perpetual loop
     return 0;
 }

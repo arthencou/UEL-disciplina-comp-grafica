@@ -28,7 +28,7 @@ class Fila
          void remover(float coordX, float coordY);
          Coordenadas busca();
          void trocaValor(float oldCoordX, float oldCoordY, float newCoordX, float newCoordY);      
-		 void ordenarPontos();
+         void ordenarPontos();
          ~Fila();
 };
 

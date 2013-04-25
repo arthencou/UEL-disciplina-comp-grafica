@@ -1,8 +1,10 @@
-//#############################################################################
-//***************             Ernesto Yuiti Saito               ***************
-//*************** 5COP005 - Introdução à Computação Gráfica     ***************
-//#############################################################################
-
+/*
+* Módulo 4 - Exercício 1
+* Nomes:
+*      Arthur Henrique Coutinho
+*      Breno Naodi Kusunoki
+*      Luiz Guilherme Castilho Martins
+*/
 #include "glut.h"
 #include <fstream> 
 #include <iostream>
@@ -470,8 +472,6 @@ void Camera::yaw (float angle)
 	setModelViewMatrix();
 }
 
-//#############################################################################
-//*****************************************************************************
 
 Mesh mesh;
 Camera cam;
@@ -484,7 +484,7 @@ double _right = 100.0;
 double _bottom = -100.0;
 double _top = 100.0;
 
-//################## myInit ##################
+
 void myInit(void)
 {
     glClearColor(0.0,0.0,0.0,0.0);        // set white background color
@@ -504,15 +504,13 @@ void myInit(void)
     cam.set(ey,lo,up);
 }
 
-//################## myDisplay ##################
 void myDisplay(void)
 {
     glClear(GL_COLOR_BUFFER_BIT);
 	mesh.drawMesh();
      
 }
-
-//################## Translacao ##################       
+  
 void Translacao(float x, float y, float z)
 {
     for(unsigned int f = 0; f < mesh.mVertices.size(); f++)
@@ -524,7 +522,6 @@ void Translacao(float x, float y, float z)
     }
 }
 
-//################## Centro de Massa ##################
 void CentroDeMassa()
 {      
        
@@ -540,7 +537,6 @@ void CentroDeMassa()
 	centroZ /= mesh.mVertices.size();
 }
 
-//################## Escala ##################
 void Escala(double scx, double scy, double scz)
 {
 	CentroDeMassa();
@@ -555,7 +551,6 @@ void Escala(double scx, double scy, double scz)
     Translacao(centroX, centroY, centroZ);     
 } 
 
-//################## Rotacao Eixo Z ##################
 void RotacaoEixoZ(double angle)
 {
 	CentroDeMassa();     
@@ -572,7 +567,6 @@ void RotacaoEixoZ(double angle)
 	Translacao(centroX, centroY, centroZ);   
 }
 
-//################## Rotacao Eixo X ##################
 void RotacaoEixoX(double angle)
 {
 	CentroDeMassa();     
@@ -589,7 +583,6 @@ void RotacaoEixoX(double angle)
 	Translacao(centroX, centroY, centroZ);   
 }
 
-//################## Rotacao Eixo Y ##################
 void RotacaoEixoY(double angle)
 {
 	CentroDeMassa();     
@@ -606,7 +599,6 @@ void RotacaoEixoY(double angle)
 	Translacao(centroX, centroY, centroZ);
 }
 
-//################## Gerencia Mouse ##################
 void GerenciaMouse(int button, int state, int x, int y)
 {	
 	if (button == GLUT_LEFT_BUTTON)
@@ -652,7 +644,6 @@ void GerenciaMouse(int button, int state, int x, int y)
 		 }
 }
 
-//################## Gerencia Teclado ##################
 void GerenciaTeclado(unsigned char key, int mouseX, int mouseY)
 {
     switch(key)
@@ -710,11 +701,9 @@ void GerenciaTeclado(unsigned char key, int mouseX, int mouseY)
     }     
 }
 
-//##################  main  ####################################
 int main(int argc, char** argv)
 {     
     string objFile;
-    //TranslacaoBool = RotacaoBool = EscalaBool = 0.0;
 	
 	DIR *pdir;
 	struct dirent *pent;
