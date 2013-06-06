@@ -455,10 +455,24 @@ ImageClass EqualizaHistograma()
     int N=0;
     int vetorHist[256];
     int newVetorHist[256];
+
+    int sR, sG, sB;
+    sR=sG=sB=0;
+    int nR=0;
+    int nG=0;
+    int nB=0;
+    int vhR[256];
+    int vhG[256];
+    int vhB[256];
+    int nvhR[256];
+    int nvhG[256];
+    int nvhB[256];
     
     for(x=0 ; x<256 ; x++) {
         vetorHist[x] = 0;
         newVetorHist[x] = 0;
+
+        nR=nG=nB=vhR[x]=vhG[x]=vhB[x]=nvhR[x]=nvhR[x]=nvhG[x]=nvhB[x]=0;
     }
     
     for(x=0;x<imageIn->SizeX();x++)
@@ -467,20 +481,41 @@ ImageClass EqualizaHistograma()
         {
 			imageIn->ReadPixel(x,y,r,g,b);
 
-			soma = ( (float)r+(float)g+(float)b ) / 3; 
-			vetorHist[(int)soma] += 1;              
+			soma = ( (float)r+(float)g+(float)b ) / 3;
+			vetorHist[(int)soma] += 1;
+
+			vhR[r] += 1;
+			vhG[g] += 1;
+			vhB[b] += 1;
+
 			N += 1;
+
+			nR += 1;
+			nG += 1;
+			nB += 1;
 		}
 	}     
         
     int k;
     for(k=0 ; k<256 ; k++) {
         soma = 0;
+
+        sR = 0;
+        sG = 0;
+        sB = 0;
         for(x=0 ; x<k ; x++){
             soma += vetorHist[x];
+
+	        sR = vhG[x];
+	        sG = vhG[x];
+	        sB = vhB[x];
         }
          
-         newVetorHist[k] = (int)(soma*(255.0f / N));
+        newVetorHist[k] = (int)(soma*(255.0f / N));
+
+        nvhR[x] = (int)(sR*(255.0f / nR));
+        nvhG[x] = (int)(sG*(255.0f / nG));
+		nvhB[x] = (int)(sB*(255.0f / nB));
     }
     
     for(x=0;x<imageIn->SizeX();x++)
@@ -488,8 +523,10 @@ ImageClass EqualizaHistograma()
 		for(y=0;y<imageIn->SizeY();y++)
         {
 			imageIn->ReadPixel(x,y,r,g,b);              
-			soma = ( (float)r+(float)g+(float)b ) / 3;              
-			imageOut->DrawPixel(x,y,(byte)newVetorHist[(int)soma],(byte)newVetorHist[(int)soma],(byte)newVetorHist[(int)soma]);
+			soma = ( (float)r+(float)g+(float)b ) / 3;
+
+			//imageOut->DrawPixel(x,y,(byte)newVetorHist[(int)soma],(byte)newVetorHist[(int)soma],(byte)newVetorHist[(int)soma]);
+			imageOut->DrawPixel(x,y,(byte)nvhR[r],(byte)nvhG[g],(byte)nvhB[b]);
 		}
 	}
 
